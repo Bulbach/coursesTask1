@@ -30,37 +30,43 @@ public class Runner {
     public static int[] countOfMassive(int[] mass) {
         int count = 0;
         int sum = 0;
-        if (mass==null|| mass.length == 0) {
+
+        if (isNotEmpty(mass)) {
             return new int[0];
         }
-        for (int i = 0; i < mass.length; i++) {
-            if (mass[i] > 0) {
-                count++;
-            }
-            if (mass[i] < 0) {
-                sum += mass[i];
-            }
+
+        for (int val : mass) {
+            count += oneIfPositive(val);
+            sum += valueIfNegative(val);
         }
+
         return new int[]{count, sum};
     }
 
     public static int[] countOfMassiveToStream(int[] mass) {
 
-        if (mass==null|| mass.length == 0) {
+        if (isNotEmpty(mass)) {
             return new int[0];
         }
 
-        int[] array = new int[2];
+        int[] array = new int[]{0,0};
 
         array[1] = Arrays.stream(mass)
-                .peek(number -> {
-                    if (number > 0) {
-                        array[0]++;
-                    }
-                })
+                .peek(number -> array[0] += oneIfPositive(number))
                 .filter(n -> n < 0)
-                .reduce((x, y) -> x + y)
-                .getAsInt();
+                .sum();
         return array;
+    }
+
+    private static boolean isNotEmpty(int[] mass) {
+        return mass == null || mass.length == 0;
+    }
+
+    private static int oneIfPositive(final int value) {
+        return value > 0 ? 1 : 0;
+    }
+
+    private static int valueIfNegative(final int value) {
+        return value < 0 ? value : 0;
     }
 }
