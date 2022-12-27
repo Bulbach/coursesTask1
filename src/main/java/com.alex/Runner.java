@@ -1,11 +1,6 @@
 package com.alex;
 
 import java.util.Arrays;
-import java.util.OptionalInt;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Function;
-import java.util.function.ToIntFunction;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -24,6 +19,10 @@ public class Runner {
         System.out.println(Arrays.toString(countOfMassiveToStream(mass2)));
         System.out.println(Arrays.toString(countOfMassiveToStream(massZero)));
 
+        System.out.println(Arrays.toString(countOfMassiveToStreamCollect(mass1)));
+        System.out.println(Arrays.toString(countOfMassiveToStreamCollect(mass2)));
+        System.out.println(Arrays.toString(countOfMassiveToStreamCollect(massZero)));
+
 
     }
 
@@ -31,7 +30,7 @@ public class Runner {
         int count = 0;
         int sum = 0;
 
-        if (isNotEmpty(mass)) {
+        if (isEmpty(mass)) {
             return new int[0];
         }
 
@@ -45,11 +44,11 @@ public class Runner {
 
     public static int[] countOfMassiveToStream(int[] mass) {
 
-        if (isNotEmpty(mass)) {
+        if (isEmpty(mass)) {
             return new int[0];
         }
 
-        int[] array = new int[]{0,0};
+        int[] array = new int[]{0, 0};
 
         array[1] = Arrays.stream(mass)
                 .peek(number -> array[0] += oneIfPositive(number))
@@ -58,7 +57,27 @@ public class Runner {
         return array;
     }
 
-    private static boolean isNotEmpty(int[] mass) {
+    public static int[] countOfMassiveToStreamCollect(int[] mass) {
+        if (isEmpty(mass)) {
+            return new int[0];
+        }
+
+        return Arrays.stream(mass)
+                .filter(x -> x != 0)
+                .collect(() -> new int[]{0, 0}
+                        , (acum, value) -> {
+                            if (value > 0) {
+                                ++acum[0];
+                            } else if (value < 0) {
+                                acum[1] += value;
+                            }
+                        }, (acum1, acum2) -> {
+                            acum1[0] += acum2[0];
+                            acum1[1] += acum2[1];
+                        });
+    }
+
+    private static boolean isEmpty(int[] mass) {
         return mass == null || mass.length == 0;
     }
 
