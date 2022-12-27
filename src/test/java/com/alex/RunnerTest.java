@@ -1,14 +1,16 @@
 package com.alex;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+
 
 class RunnerTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void countOfMassive() {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void countOfMassiveToStream() {
     }
 }
