@@ -1,6 +1,7 @@
 package com.alex;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -75,6 +76,17 @@ public class Runner {
                             acum1[0] += acum2[0];
                             acum1[1] += acum2[1];
                         });
+    }
+
+    public static int[] countOfMassiveToStreamCollectClass(int[] mass) {
+        if (isEmpty(mass)) {
+            return new int[0];
+        }
+
+        return Arrays.stream(mass)
+                .filter(x -> x != 0)
+                .boxed()
+                .collect(MyCollector.myCollector());
     }
 
     private static boolean isEmpty(int[] mass) {
