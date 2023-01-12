@@ -5,7 +5,6 @@ import com.example.task2.serviceses.Career;
 import com.example.task2.serviceses.CargoYard;
 import com.example.task2.serviceses.TankFarm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

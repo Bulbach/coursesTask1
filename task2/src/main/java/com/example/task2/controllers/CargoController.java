@@ -18,11 +18,6 @@ public class CargoController {
     private CargoMapConstruct cargoMapConstruct;
 
 
-    @GetMapping(value = "/")
-    public String hello() {
-        return "Hello";
-    }
-
     @PostMapping("/cargo")
     public Cargo treatment(@RequestBody Cargo cargo){
         cargoMapConstruct.chooseOperation(cargo);
