@@ -1,6 +1,5 @@
 package com.example.task2;
 
-import com.example.task2.model.Cargo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -9,14 +8,18 @@ public class Task2Application {
 
     public static void main(String[] args) {
         SpringApplication.run(Task2Application.class, args);
+        /**
+        Пример запроса:
+        {
+            "name":"цистерна",
+            "type":"налив",
+            "fully":true
+        }
 
-//        Cargo cargo = Cargo.builder()
-//                .name("щебень")
-//                .type("сыпучие")
-//                .build();
-//
-//
-//        System.out.println(cargo.isFully());
+        имена: цистерна, полувагон, крытый
+        типы: налив, сыпучие, тарные
+         */
+
     }
 
 }
